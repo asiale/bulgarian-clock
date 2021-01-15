@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+public class P74_BulgarianSolitaire {
+
+public static void main(String[] args) {
+    // TODO Auto-generated method stub
+    final int MAX_CARD = 45; 
+    ArrayList<ArrayList<Integer>> twoDArrayList =  new ArrayList<ArrayList<Integer>>();
+
+    int column = 1; 
+    int card = 0;
+    int left = MAX_CARD;
+
+
+    do{ 
+        column = (int) (Math.random()*(left)+1);  // 
+        System.out.println("Column :"+column);
+
+        ArrayList<Integer> row = new ArrayList<Integer>(); //New row to add. Must declare here. 
+        for (int j=0;j<column;j++){
+            card++;
+
+            row.add(card);
+        }
+
+        twoDArrayList.add(row);
+
+        left = MAX_CARD - card ;
+
+
+    } while (card <MAX_CARD);
+    System.out.println(twoDArrayList);
+    System.out.println();
+
+    boolean finish = false;
+
+    while (!finish){
+        ArrayList<Integer> row = new ArrayList<Integer>(); //New row
+
+        //remove one card from each row
+        for (int i=0;i<twoDArrayList.size();i++){
+            row.add(twoDArrayList.get(i).get(0));
+            twoDArrayList.get(i).remove(0);  //Remove the first column 
+            if (twoDArrayList.get(i).isEmpty()){
+                twoDArrayList.remove(twoDArrayList.get(i)); 
+                i--;
+            }
+        }
+
+        twoDArrayList.add(row);
+
+        ArrayList<Integer> size = new ArrayList<Integer>(); // New list
+        for (int i=0;i<twoDArrayList.size();i++){
+            size.add(twoDArrayList.get(i).size());
+        }
+        Collections.sort(size);
+                
